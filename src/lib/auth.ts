@@ -1,14 +1,18 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
-import { role } from "better-auth/plugins";
-import { stat } from "node:fs";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  trustedOrigins: [process.env.APP_URL || "http://localhost:3000"],
+  trustedOrigins: [process.env.APP_URL || "http://localhost:4000"],
+  emailAndPassword: {
+    enabled: true,
+    autoSignIn: false,
+    requireEmailVerification: true,
+  },
+
   user: {
     additionalFields: {
       role: {
@@ -16,18 +20,20 @@ export const auth = betterAuth({
         default: "user",
         required: false,
       },
-      phone:{
+      phone: {
         type: "string",
         required: false,
       },
-      status:{
+      status: {
         type: "string",
         default: "active",
         required: false,
-      }
+      },
     },
-    emailAndPassword: {
-      enabled: true,
+  },
+    emailVerification: {
+    sendVerificationEmail: async ({ user, url, token }, request) => {
+      console.log("VERIFICATION EMAIL TRIGGERED");
     },
   },
 });
