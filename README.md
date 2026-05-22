@@ -1,5 +1,3 @@
-
-
 # 📝 Prisma Blog App
 
 A modern **Node.js + Express + Prisma + PostgreSQL** backend application for managing blog posts, users, and authentication.
