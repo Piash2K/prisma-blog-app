@@ -212,7 +212,6 @@ If you'd like to contribute:
 4. Submit a Pull Request
 
 ---
-
 # 📄 License
 
 This project is licensed under the **ISC License**.
